@@ -1,9 +1,7 @@
-// Get references to the input, button, and output elements
 const inputField = document.getElementById("strsInput");
 const submitButton = document.getElementById("submit");
 const outputDiv = document.getElementById("output");
 
-// Define the groupAnagrams function
 const groupAnagrams = strs => {
   let myMap = new Map();
 
@@ -22,17 +20,19 @@ const groupAnagrams = strs => {
   return Array.from(myMap.values());
 };
 
-// Define a function to handle input and display output
 const handleInputAndDisplayOutput = () => {
-  // Get input value
   const inputValue = inputField.value;
-  // Parse input value as an array of strings
   const strs = JSON.parse(inputValue);
-  // Call groupAnagrams function with the input
   const result = groupAnagrams(strs);
-  // Display the result in the output field
   outputDiv.textContent = JSON.stringify(result);
 };
 
-// Add event listener to the submit button
 submitButton.addEventListener("click", handleInputAndDisplayOutput);
+
+// Add event listener to the input field to listen for the Enter key press event
+inputField.addEventListener("keypress", function(event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    handleInputAndDisplayOutput();
+  }
+});
